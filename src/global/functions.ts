@@ -1,7 +1,7 @@
 import { manageTitleColorContrast } from "./color/color-contrast";
 
 function manageColorContrast() {
-  console.log("[gs-cdnflow]: managing title color contrast...")
+  console.log("[gs-cdnflow/global]: managing title color contrast...")
   const cards = document.querySelectorAll(".card-label") as NodeListOf<HTMLElement>;
   for (let card of cards) {
     manageTitleColorContrast(card)
@@ -17,7 +17,7 @@ function observeStoryTitleChanges() {
       // check if element has been added
       if (mut.addedNodes.length) {
         for (let card of mut.addedNodes) {
-          console.log("[gs-cdnflow]: MutationObeserver detected new content. Managing title color contrast...")
+          console.log("[gs-cdnflow/global]: MutationObeserver detected new content. Managing title color contrast...")
           manageTitleColorContrast(card as HTMLElement)
         }
       }
