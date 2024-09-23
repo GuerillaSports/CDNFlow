@@ -10,7 +10,9 @@ function manageColorContrast() {
 
 
 function observeStoryTitleChanges() {
-  const dynamic_list = document.querySelector(".dynam-list") as HTMLElement
+  const dynamic_list = document.querySelector(".dynam-list")
+  if (!dynamic_list) return
+
   const config = { childList: true, subtree: true }
   const story_title_observer = new MutationObserver((mutList) => {
     for (let mut of mutList) {
@@ -23,6 +25,7 @@ function observeStoryTitleChanges() {
       }
     }
   })
+
   story_title_observer.observe(dynamic_list, config)
 }
 
