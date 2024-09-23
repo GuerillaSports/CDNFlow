@@ -14,10 +14,8 @@ function checkSubFeaturedHeader() {
 /**
  * Default export contains functions which should be executed in `DOMContentLoaded` listener
  */
-const pageFunctions = {
+export const pageFunctions = {
   DOMContentLoaded: {
     checkSubFeaturedHeader,
   }
 }
-
-export default pageFunctions
