@@ -2,7 +2,7 @@ import articles from "./articles/init";
 
 
 
-const pageFunctions: Record<string, Record<string, Function>> = {
+const pageFunctions: Record<string, any> = {
   articles
 }
 
