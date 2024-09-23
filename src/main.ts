@@ -1,5 +1,5 @@
 import { setupGlobalEvents } from "./global";
-import articlePageFunctions from "./pages/articles/init"
+import { pageFunctions as articlePageFunctions } from "./pages/articles/init"
 
 const path = window.location.pathname.split("/")[1]
 let currentPageFunctions = {}

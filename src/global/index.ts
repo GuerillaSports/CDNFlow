@@ -10,12 +10,15 @@ export function setupGlobalEvents(pageFunctions: Record<string, any>) {
     }
   }
 
+
   document.addEventListener("DOMContentLoaded", function () {
-    executeFunctionsByEventType({ ...pageFunctions, ...globalFunctions }, "DOMContentLoaded")
+    executeFunctionsByEventType(globalFunctions, "DOMContentLoaded")
+    executeFunctionsByEventType(pageFunctions, "DOMContentLoaded")
   })
 
   window.addEventListener("load", function () {
-    executeFunctionsByEventType({ ...pageFunctions, ...globalFunctions }, "load")
+    executeFunctionsByEventType(globalFunctions, "load")
+    executeFunctionsByEventType(pageFunctions, "load")
   })
 
 }
