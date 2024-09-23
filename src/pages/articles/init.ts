@@ -1,8 +1,7 @@
 /**
  * Should a custom event listener be required, do it in the file. Otherwise, add the function to the default exports to be executed with the global functions in "DOMContentLoaded"
  */
-document.addEventListener("load", function () {
-
+window.addEventListener("load", function () {
   function test_non_default_function() {
     console.log("[gs-cdnflow/articles]: confirming scoped functions. Non default functions still execute")
   }
