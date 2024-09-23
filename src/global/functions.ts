@@ -20,7 +20,7 @@ function observeStoryTitleChanges() {
       if (mut.addedNodes.length) {
         for (let card of mut.addedNodes) {
           console.log("[gs-cdnflow/global]: MutationObeserver detected new content. Managing title color contrast...")
-          manageTitleColorContrast(card as HTMLElement)
+          manageTitleColorContrast(card as HTMLElement | null)
         }
       }
     }
