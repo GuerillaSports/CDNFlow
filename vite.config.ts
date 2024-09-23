@@ -3,7 +3,7 @@ import { defineConfig } from "vite"
 export default defineConfig({
   build: {
     lib: {
-      entry: "src/global/init.ts",
+      entry: "src/main.ts",
       name: "gsCdnFlow",
       fileName: "bundle",
       formats: ["iife"]
