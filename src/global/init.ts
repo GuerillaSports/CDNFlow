@@ -1,5 +1,5 @@
+import scopedFunctions from "../pages";
 import { manageTitleColorContrast } from "./color/color-contrast";
-import { requiresScopedScript } from "./utils";
 
 /**
  * Manage color contrast on initial load.
@@ -11,10 +11,16 @@ document.addEventListener("DOMContentLoaded", function () {
     manageTitleColorContrast(card)
   }
 
-  const url = document.URL
-  if (requiresScopedScript(url)) {
-    console.log("[gs-cdnflow]: page requires scoped functions")
-    // do something!
+  /**
+   * If scoped functions exist for the current page, execute all default exports. 
+   * NOTE: this should, theoretically, also execute any other functions in this page?
+   */
+  const path = window.location.pathname.split("/")[1];
+  if (scopedFunctions[path]) {
+    const fns = scopedFunctions[path]
+    for (let fn in fns) {
+      fns[fn]()
+    }
   }
 
 })
