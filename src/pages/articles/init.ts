@@ -4,7 +4,8 @@
 function checkSubFeaturedHeader() {
   console.log("[gs-cdnflow/articles]: check sub featured header")
   const hasItems = !!document.querySelector(".cl-top-articles-list");
-  const header = document.querySelector(".articles__top-stories--header") as HTMLElement
+  const header = document.querySelector(".articles__top-stories--header") as HTMLElement | null
+  if (!header) return
   if (!hasItems) {
     header.style.display = "none";
   };
