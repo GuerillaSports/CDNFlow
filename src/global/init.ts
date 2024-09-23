@@ -5,6 +5,7 @@ import { requiresScopedScript } from "./utils";
  * Manage color contrast on initial load.
  */
 document.addEventListener("DOMContentLoaded", function () {
+  console.log("[gs-cdnflow]: managing title color contrast...")
   const cards = document.querySelectorAll(".card-label") as NodeListOf<HTMLElement>;
   for (let card of cards) {
     manageTitleColorContrast(card)
@@ -12,6 +13,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   const url = document.URL
   if (requiresScopedScript(url)) {
+    console.log("[gs-cdnflow]: page requires scoped functions")
     // do something!
   }
 
@@ -29,6 +31,7 @@ const story_title_observer = new MutationObserver((mutList) => {
     // check if element has been added
     if (mut.addedNodes.length) {
       for (let card of mut.addedNodes) {
+        console.log("[gs-cdnflow]: MutationObeserver detected new content. Managing title color contrast...")
         manageTitleColorContrast(card as HTMLElement)
 
       }
