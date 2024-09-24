@@ -2,23 +2,21 @@ import globalFunctions from "./functions";
 
 export function setupGlobalEvents(pageFunctions: Record<string, any>) {
 
+  // Get all event types from local and global functions
+  const eventTypes = [...Object.keys(pageFunctions), ...Object.keys(globalFunctions)]
+
   function executeFunctionsByEventType(fns: Record<string, any>, eventType: string) {
     if (fns && fns[eventType]) {
       for (let fnKey in fns[eventType]) {
-        fns[eventType][fnKey]()
+        fns[eventType][fnKey]() // => articlesFuncs[DOMContentLoaded][firstFunc]()
       }
     }
   }
-
-
-  document.addEventListener("DOMContentLoaded", function () {
-    executeFunctionsByEventType(globalFunctions, "DOMContentLoaded")
-    executeFunctionsByEventType(pageFunctions, "DOMContentLoaded")
-  })
-
-  window.addEventListener("load", function () {
-    executeFunctionsByEventType(globalFunctions, "load")
-    executeFunctionsByEventType(pageFunctions, "load")
-  })
-
+  // loop over event types and register event listener with functions
+  for (let eventType of eventTypes) {
+    document.addEventListener(eventType, function () {
+      executeFunctionsByEventType(pageFunctions, eventType)
+      executeFunctionsByEventType(globalFunctions, eventType)
+    })
+  }
 }
