@@ -2,8 +2,6 @@ import { GS_BLUE } from "../consts/colors";
 
 export function manageTitleColorContrast(card: HTMLElement | null) {
   if (!card) return
-  // const on_color = card.querySelector(".title-on-color") as HTMLElement | null
-  // const target = card.querySelector(".title-blue") as HTMLElement | null
   const on_colors = card.querySelectorAll(".title-on-color")
   const targets = card.querySelectorAll(".title-blue")
   if (on_colors.length !== targets.length) {
