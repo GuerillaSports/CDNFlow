@@ -20,14 +20,14 @@ The project is organized to separate global functions from page-specific ones, w
 src/
 ├── global/                  # Centralized event handler and utility functions 
 │   ├── functions.ts         # global functions to be executed on every page
-│   ├── utils.ts             # global functions to be executed on every page
+│   ├── utils.ts
 │   ├── colors/              # Global function components
 ├── pages/                   # Page-specific directories
 │   ├── articles/
 │   │   └── init.ts          # Functions for /articles page
 ├── main.ts                  # Main entry point that sets up the event listeners
-├── dist/                    # Output for built files (for CDN delivery)
-│   ├── bundle.js            # What the CDN Delivers
+dist/                        # Output for built files (for CDN delivery)
+├── bundle.js                # What the CDN Delivers
 ```
 
 ## How It Works
