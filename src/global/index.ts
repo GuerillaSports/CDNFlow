@@ -14,7 +14,7 @@ export function setupGlobalEvents(pageFunctions: Record<string, any>) {
   }
   // loop over event types and register event listener with functions
   for (let eventType of eventTypes) {
-    document.addEventListener(eventType, function () {
+    window.addEventListener(eventType, function () {
       executeFunctionsByEventType(pageFunctions, eventType)
       executeFunctionsByEventType(globalFunctions, eventType)
     })
