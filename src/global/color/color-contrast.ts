@@ -2,17 +2,19 @@ import { GS_BLUE } from "../consts/colors";
 
 export function manageTitleColorContrast(card: HTMLElement | null) {
   if (!card) return
-  const on_color = card.querySelector(".title-on-color") as HTMLElement | null
-  const target = card.querySelector(".title-blue") as HTMLElement | null
-  updateTitleColor(target, on_color)
-  // if (!on_color) return;
-  // if (on_color.style.color === "white") {
-  //   const story_title = card.querySelector(".title-blue") as HTMLElement | null
-  //   // if (!story_title) return
-  //   console.log(story_title, !!story_title)
-  //   if (story_title === null) return
-  //   story_title.style.color = GS_BLUE;
-  // }
+  // const on_color = card.querySelector(".title-on-color") as HTMLElement | null
+  // const target = card.querySelector(".title-blue") as HTMLElement | null
+  const on_colors = card.querySelectorAll(".title-on-color")
+  const targets = card.querySelectorAll(".title-blue")
+  if (on_colors.length !== targets.length) {
+    console.warn("[gs-cdnflow/global]: SHOUD NOT HAPPEN! number of on_color and title-blue are different")
+  }
+  for (let i = 0; i < Math.max(on_colors.length, targets.length); i++) {
+    const on_color = on_colors[i] as HTMLElement | null
+    const target = targets[i] as HTMLElement | null
+
+    updateTitleColor(target, on_color)
+  }
 }
 
 export function updateTitleColor(target: HTMLElement | null, on_color: HTMLElement | null) {
