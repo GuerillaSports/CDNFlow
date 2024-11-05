@@ -1,4 +1,5 @@
 import { manageColorContrast, manageTitleColorContrast } from "./color/color-contrast";
+import { setNavBarActiveIcon } from "./nav/mobileNav";
 import { format_custom_story_title, manage_custom_story_title_instances } from "./titles/manageCustomTitles";
 
 function mange_dynamic_list_content() {
@@ -21,11 +22,12 @@ function mange_dynamic_list_content() {
   dynamic_list_content_observer.observe(dynamic_list, config)
 }
 
+
 const globalFunctions: Record<string, any> = {
   DOMContentLoaded: {
     manage_custom_story_title_instances, // FIRST (injexts content into what will be managed below)
     manageColorContrast,
-
+    setNavBarActiveIcon,
   },
   load: {
     mange_dynamic_list_content,
