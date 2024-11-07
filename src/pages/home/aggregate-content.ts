@@ -1,5 +1,5 @@
 type ContentType = "video" | "article" | "podcast"
-export function aggregateHomeContent() {
+function aggregateHomeContent() {
   console.log("[gs-cdnflow/home]: Aggregating homepage content...")
   const featContentType = filterFeaturedContent()
   if (featContentType instanceof Error) {
@@ -115,5 +115,13 @@ function groupBodyContent() {
 
   for (let c of content) {
     targetList?.appendChild(c)
+  }
+}
+/**
+ * Default export contains functions which should be executed in `DOMContentLoaded` listener
+ */
+export const pageFunctions = {
+  DOMContentLoaded: {
+    aggregateHomeContent,
   }
 }
