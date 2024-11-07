@@ -42,8 +42,6 @@ function parseFeatContentType(el: Element): ContentType | Error {
  * Removes the top featred content from the content-type's body list
  */
 function removeFeatContentFromBody(targetContent: ContentType): Error | undefined {
-  const targetClass = `home__content--${targetContent}`;
-
   const targetList = document.querySelector(`.home__content--${targetContent}`)
   if (!targetList || targetList.children.length <= 1) {
     return new Error("Error cleaning up featured content from body: list could not be found.")
