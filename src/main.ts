@@ -10,9 +10,12 @@ let currentPageFunctions = {}
 switch (path) {
   case "articles":
     currentPageFunctions = articlePageFunctions
-    break
-  default:
+    break;
+  case "":
     currentPageFunctions = homePageFunctions
+    break;
+  default:
+    console.log(`[gs-cdnflow]: no local functions to execute on page ${path}...`)
 }
 
 setupGlobalEvents(currentPageFunctions)
