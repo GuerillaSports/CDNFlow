@@ -11,9 +11,8 @@ switch (path) {
   case "articles":
     currentPageFunctions = articlePageFunctions
     break
-  case "dev-everything":
+  default:
     currentPageFunctions = homePageFunctions
-    break
 }
 
 setupGlobalEvents(currentPageFunctions)
