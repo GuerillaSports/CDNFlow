@@ -5,7 +5,7 @@ type ContentType = "video" | "article" | "podcast"
  * removes featured content from it's content type in the body
  * Groups and organizes all body content by release date
  */
-function aggregateHomeContent(): void {
+export default function aggregateHomeContent(): void {
   console.log("[gs-cdnflow/home]: Aggregating homepage content...")
   const featContentType = filterFeaturedContent()
   if (featContentType instanceof Error) {
@@ -121,13 +121,5 @@ function groupBodyContent() {
 
   for (let c of content) {
     targetList?.appendChild(c)
-  }
-}
-/**
- * Default export contains functions which should be executed in `DOMContentLoaded` listener
- */
-export const pageFunctions = {
-  DOMContentLoaded: {
-    aggregateHomeContent,
   }
 }
