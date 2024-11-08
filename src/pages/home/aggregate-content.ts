@@ -1,5 +1,11 @@
 type ContentType = "video" | "article" | "podcast"
-function aggregateHomeContent() {
+
+/**
+ * Filters featured content to show most recent
+ * removes featured content from it's content type in the body
+ * Groups and organizes all body content by release date
+ */
+export default function aggregateHomeContent(): void {
   console.log("[gs-cdnflow/home]: Aggregating homepage content...")
   const featContentType = filterFeaturedContent()
   if (featContentType instanceof Error) {
@@ -19,12 +25,10 @@ function aggregateHomeContent() {
     return
   }
   console.log("[gs-cdnflow/home]: organized body content by date. Success.")
-
 }
 
-/*
+/**
  * Parses the content type of a parent element from the class list
- * 
  */
 function parseFeatContentType(el: Element): ContentType | Error {
   let type = null
@@ -38,7 +42,7 @@ function parseFeatContentType(el: Element): ContentType | Error {
   return type || new Error("Error: failed to parse content type from class list")
 }
 
-/*
+/**
  * Removes the top featred content from the content-type's body list
  */
 function removeFeatContentFromBody(targetContent: ContentType): Error | undefined {
@@ -50,6 +54,11 @@ function removeFeatContentFromBody(targetContent: ContentType): Error | undefine
   const children = targetList.children
   targetList.removeChild(children[0])
 }
+/**
+ * Filters top featured content and leaves only the most-recently released content. 
+ *
+ * Returns a string `ContentType` for the type of content left in featured
+ */
 function filterFeaturedContent(): ContentType | Error {
   const els = document.querySelectorAll(".home__feat");
 
@@ -81,9 +90,8 @@ function filterFeaturedContent(): ContentType | Error {
   return parseFeatContentType(target)
 }
 
-/*
+/**
  * Aggregate all body content into single list sorted by release date
- * 
  */
 function groupBodyContent() {
   const videos = document.querySelector((".home__content--videos"))
@@ -113,13 +121,5 @@ function groupBodyContent() {
 
   for (let c of content) {
     targetList?.appendChild(c)
-  }
-}
-/**
- * Default export contains functions which should be executed in `DOMContentLoaded` listener
- */
-export const pageFunctions = {
-  DOMContentLoaded: {
-    aggregateHomeContent,
   }
 }

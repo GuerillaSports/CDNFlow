@@ -1,6 +1,6 @@
 import { setupGlobalEvents } from "./global";
 import { pageFunctions as articlePageFunctions } from "./pages/articles/init"
-import { pageFunctions as homePageFunctions } from "./pages/home/aggregate-content";
+import { pageFunctions as homePageFunctions } from "./pages/home/init"
 
 const path = window.location.pathname.split("/")[1]
 let currentPageFunctions = {}
