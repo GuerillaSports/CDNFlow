@@ -41,9 +41,9 @@ export function format_custom_story_title(titleEl: HTMLElement) {
 
   const split = text.split(" ")
 
-  const newTitle: { [key: string]: string | undefined } = {
-    o: split.pop(), // outlined text= last word
-    b: [...split].join(" ") // blue text is up until last word. Last spce should be added
+  const newTitle = {
+    b: split.splice(0, split.length / 2 + 1).join(" "),
+    o: split.join(" ")
   }
 
   if (!newTitle.o || !newTitle.b) {
