@@ -155,45 +155,11 @@ To serve the latest build files from jsDelivr, include the following in your HTM
 <script src="https://cdn.jsdelivr.net/gh/GuerillaSports/CDNFlow@latest/dist/bundle.iife.js"></script>
 ```
 
-## Custom Story Titles
+---
 
-Custom story titles allow `stories` and `articles` and other content of the sort which typically rely on `story-types` to leverage the rich-thumbnail system and enrich content. Before this feature, the conten's (without a story type) thumnail was empty. This feature (which I believe I just finished for the original developers) allows admins to add a `story-title` to the content. The story title is then parsed by this feature and broken up into two parts and injected into the thumbnail.
+## Features: 
 
-### Setup
-
-Each `.card-label` already has a `.story-titles` div with the `story-type` content. This div is only rendered if a story type is set.
-
-1. Duplicate that div and change the class name to `.story-titles__custom`
-2. Set a data attribute on that div to `data-custom-title={{ Story Title }}` ([See How to add custom attributes in webflow](https://docs.developers.webflow.com/designer/reference/custom-attributes)).
-3. Conditionall render the `.story-titles__custom` to when a `story-type is NOT set && story-title is set`
-4. Now set the text content for both the `.title-blue` and `.title-outline` to the `story-title`. Ensure you are only changing the text content for these elements under `.story-titles__custom`, not under `.story-titles`.
-5. **In the webflow-designer this will look wrong!** Don't worry- the custom code from this system isn't injected into the site until it is published. You *should* see the custom story title duplicated in the designer.
-6. Publish the updates the the test domain `guerilla-sports.webflow.io` to ensure the changes worked correctly. You can also check the JS Console where logs should confim custom story title injection like this:
-
-```
-[gs-cdnflow/global]: formatting custom story title
-```
-
-## Aggregate Homepage content
-
-These features, along with most others in this project, rely heavily on `class` names, so please exercise caution when editing the site.
-Webflow does now allow users to build content lists which contain different types of content. So, in order to create a homepage which aggregates all content types, the page needs to contain the following:
-
-- Featured Block
-  - A featured card containing the most recent content **from each content type**: `videos, articles, and podcasts`
-- Body Content Lists
-  - A collection list for each content type, limited to start at the 1st element (even if that duplicates the featured content above)
-
-Once the page is setup, the following functions take care of the filtration, aggregation, and sorting.
-
-### Filter Featured Content
-
-Selects the featured content from each content type, hides each of them, then selects the newest by release date, shows it and returns the content type of that element: `video, story, or poscast`.
-
-### Remove Featured Content from Body
-
-Based on the returned `ContentType` from `filterFeaturedContent`, that list is selected and the topmost element is remove (assuming that content list is ordered newest to oldest, this should hide the element and prevent duplicate content from showing in the featured section and in this list).
-
-### Group Body Content
-
-Creates an array with all content from each collection list, sorts it by release date, removes them from the original list, and adds the ordered list to the target body list
+- [Home Page Aggregation](https://github.com/GuerillaSports/CDNFlow/tree/main/src/pages/home)
+  - Assuming the homepage is properly setup, this feature filters, aggregates, and sorts all different types of GS's content into a consumable homepage
+- [Custom Story Titles](https://github.com/GuerillaSports/CDNFlow/tree/main/src/global)
+  - For content without a pre-defined story-type, this feature grabs the custom title and formats it onto the card as if it were a pre-defined title
