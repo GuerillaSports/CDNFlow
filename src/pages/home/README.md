@@ -1,6 +1,10 @@
+# Homepage Features
+
 ## Aggregate Homepage content
 
-These features, along with most others in this project, rely heavily on `class` names, so please exercise caution when editing the site.
+> [!important]
+> These features, along with most others in this project, rely heavily on `class` names, so please exercise caution when editing the site.
+
 Webflow does now allow users to build content lists which contain different types of content. So, in order to create a homepage which aggregates all content types, the page needs to contain the following:
 
 - Featured Block
