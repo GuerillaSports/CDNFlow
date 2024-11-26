@@ -159,7 +159,12 @@ To serve the latest build files from jsDelivr, include the following in your HTM
 
 ## Features: 
 
-- [Home Page Aggregation](https://github.com/GuerillaSports/CDNFlow/tree/main/src/pages/home)
-  - Assuming the homepage is properly setup, this feature filters, aggregates, and sorts all different types of GS's content into a consumable homepage
-- [Custom Story Titles](https://github.com/GuerillaSports/CDNFlow/tree/main/src/global)
-  - For content without a pre-defined story-type, this feature grabs the custom title and formats it onto the card as if it were a pre-defined title
+- [Global Features](https://github.com/GuerillaSports/CDNFlow/tree/main/src/global):
+  - custom story title formatting
+  - Custom story title color contrast feature
+  - Mobile navigation conditionall icon swapping
+- Scoped page features
+  - [Home Page Aggregation](https://github.com/GuerillaSports/CDNFlow/tree/main/src/pages/home)
+    - Assuming the homepage is properly setup, this feature filters, aggregates, and sorts all different types of GS's content into a consumable homepage
+  - [Articles Page Header removal]()
+    - Conditionally removes content should no content exists/be rendered 
