@@ -10,6 +10,10 @@ This repo provides a solution so managing custom scripts across various pages vi
 
 This project provides a structured way to deliver custom JavaScript code to a Webflow site via a CDN. The system is designed to handle global and page-specific functions, with support for multiple DOM events like DOMContentLoaded, load, and others.
 
+>[!Important]
+> Exercise caution when editing the webflow site and try to preserve all class names
+> These features rely heavily on selecting elements based on their class names!
+
 ## Project Structure
 
 The project is organized to separate global functions from page-specific ones, while handling event listener setup in a centralized way for better maintainability and scalability.
@@ -18,16 +22,19 @@ The project is organized to separate global functions from page-specific ones, w
 
 ```
 src/
-├── global/                  # Centralized event handler and utility functions 
-│   ├── functions.ts         # global functions to be executed on every page
-│   ├── utils.ts             # global functions to be executed on every page
-│   ├── colors/              # Global function components
-├── pages/                   # Page-specific directories
+├── global/                        # Centralized event handler and utility functions 
+│   ├── functions.ts               # global functions to be executed on every page
+│   ├── utils.ts                   # global functions to be executed on every page
+│   ├── colors/                    # Global function components
+├── pages/                         # Page-specific directories
 │   ├── articles/
-│   │   └── init.ts          # Functions for /articles page
-├── main.ts                  # Main entry point that sets up the event listeners
-├── dist/                    # Output for built files (for CDN delivery)
-│   ├── bundle.js            # What the CDN Delivers
+│   │   └── init.ts                # Functions for /articles page
+│   ├── home/
+│   │   └── init.ts                # Init functions for / page
+│   │   └── aggregate-content.ts   # Aggregate Content Functions for / page
+├── main.ts                        # Main entry point that sets up the event listeners
+├── dist/                          # Output for built files (for CDN delivery)
+│   ├── bundle.js                  # What the CDN Delivers
 ```
 
 ## How It Works
@@ -114,10 +121,14 @@ const path = window.location.pathname.split('/')[1];
 
 // Load the correct page-specific functions
 let currentPageFunctions = {};
-if (path === 'articles') {
-  currentPageFunctions = articlePageFunctions;
-} else if (path === 'contact') {
-  currentPageFunctions = contactPageFunctions;
+switch (path) {
+  case "articles": 
+    currentPageFunctions = articlePageFunctions;
+    break
+  case "": 
+    currentPageFunctions = homePageFunctions;
+  default: 
+    console.log(`no local functions for page ${path}`)
 }
 
 // Pass the functions to the global handler
@@ -144,17 +155,16 @@ To serve the latest build files from jsDelivr, include the following in your HTM
 <script src="https://cdn.jsdelivr.net/gh/GuerillaSports/CDNFlow@latest/dist/bundle.iife.js"></script>
 ```
 
-## Custom Story Titles
-Custom story titles allow `stories` and `articles` and other content of the sort which typically rely on `story-types` to leverage the rich-thumbnail system and enrich content. Before this feature, the conten's (without a story type) thumnail was empty. This feature (which I believe I just finished for the original developers) allows admins to add a `story-title` to the content. The story title is then parsed by this feature and broken up into two parts and injected into the thumbnail. 
-### Setup
-Each `.card-label` already has a `.story-titles` div with the `story-type` content. This div is only rendered if a story type is set. 
-1. Duplicate that div and change the class name to `.story-titles__custom`
-2. Set a data attribute on that div to `data-custom-title={{ Story Title }}` ([See How to add custom attributes in webflow](https://docs.developers.webflow.com/designer/reference/custom-attributes)).
-3. Conditionall render the `.story-titles__custom` to when a `story-type is NOT set && story-title is set` 
-4. Now set the text content for both the `.title-blue` and `.title-outline` to the `story-title`. Ensure you are only changing the text content for these elements under `.story-titles__custom`, not under `.story-titles`. 
-5. **In the webflow-designer this will look wrong!** Don't worry- the custom code from this system isn't injected into the site until it is published. You *should* see the custom story title duplicated in the designer.
-6. Publish the updates the the test domain `guerilla-sports.webflow.io` to ensure the changes worked correctly. You can also check the JS Console where logs should confim custom story title injection like this: 
-```
-[gs-cdnflow/global]: formatting custom story title
-```
+---
 
+## Features: 
+
+- [Global Features](https://github.com/GuerillaSports/CDNFlow/tree/main/src/global):
+  - custom story title formatting
+  - Custom story title color contrast feature
+  - Mobile navigation conditionall icon swapping
+- Scoped page features
+  - [Home Page Aggregation](https://github.com/GuerillaSports/CDNFlow/tree/main/src/pages/home)
+    - Assuming the homepage is properly setup, this feature filters, aggregates, and sorts all different types of GS's content into a consumable homepage
+  - [Articles Page Header removal]()
+    - Conditionally removes content should no content exists/be rendered 
